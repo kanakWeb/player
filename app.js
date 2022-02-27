@@ -13,10 +13,10 @@ const allPlayers=()=>{
 fetch(url)
 .then((res)=>res.json())
 .then((data)=>playersDetails(data.player))
-
+document.getElementById('sppiner').style.display='none'
 }
 
-document.getElementById('sppiner').style.display='none'
+
 
 
 const playersDetails=(playersof)=>{
