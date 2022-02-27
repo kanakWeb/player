@@ -3,6 +3,8 @@
 .then(data=>console.log(data)) */
 
 const allPlayers=()=>{
+    document.getElementById('player-info').innerText=' '
+    
     const searchField=document.getElementById('search-field').value;
     
     const url=`https://www.thesportsdb.com/api/v1/json/2/searchplayers.php?p=${searchField}`
@@ -13,6 +15,7 @@ fetch(url)
 }
 const playersDetails=(playersof)=>{
     // console.log(players)
+    
     
     for(const player of playersof){
     
@@ -38,6 +41,7 @@ const playersDetails=(playersof)=>{
 }
 
 const Details=(id)=>{
+    document.getElementById('deails-div').innerText=' '
     const url=`https://www.thesportsdb.com/api/v1/json/2/lookupplayer.php?id=${id} `;
   fetch(url)
   .then((res)=>res.json())
@@ -61,7 +65,7 @@ else{
    const div=document.createElement('div')
 
    div.innerHTML=`<div class="card px-1 py-4 border my-2 text-center">
-   <h3>ID: </h3>
+   <h3>Team ID:${playerId.idTeam} </h3>
    <h5>Team:${playerId.strTeam}</h5>
    <h6>Gender:${playerId.strGender}</h6>
    </div>`
