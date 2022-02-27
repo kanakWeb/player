@@ -3,7 +3,8 @@
 .then(data=>console.log(data)) */
 
 const allPlayers=()=>{
-    document.getElementById('player-info').innerText=' '
+   const text= document.getElementById('player-info').innerText=' '
+    document.getElementById('sppiner').style.display='block'
     
     const searchField=document.getElementById('search-field').value;
     
@@ -12,12 +13,20 @@ const allPlayers=()=>{
 fetch(url)
 .then((res)=>res.json())
 .then((data)=>playersDetails(data.player))
+
 }
+
+document.getElementById('sppiner').style.display='none'
+
+
 const playersDetails=(playersof)=>{
     // console.log(players)
+    if(playersof=='false'|| playersof==''){
+        document.getElementById('sppiner').style.display='block'
+    }
     
-    
-    for(const player of playersof){
+    else{
+        for(const player of playersof){
     
         const parent=document.getElementById('player-info')
         const div=document.createElement('div')
@@ -33,9 +42,9 @@ const playersDetails=(playersof)=>{
         </div>`
         parent.appendChild(div)
       
+        }
     
     }
-    
    //console.log(players)
 
 }
