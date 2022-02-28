@@ -3,29 +3,38 @@
 .then(data=>console.log(data)) */
 
 const allPlayers=()=>{
-   const text= document.getElementById('player-info').innerText=' '
+    document.getElementById('player-info').innerText=' '
     document.getElementById('sppiner').style.display='block'
     
     const searchField=document.getElementById('search-field').value;
+    const errorShow=document.getElementById('error-handle').innerHTML=``
+    if(searchField==''){
+        const errorShow=document.getElementById('error-handle')
+        const div=document.createElement('div')
+        div.innerHTML=`<h6 class="text-danger mt-auto">Not found please enter right information!</h6>`
+        errorShow.appendChild(div)
+        document.getElementById('sppiner').style.display='block'
+    }
     
+   else{
     const url=`https://www.thesportsdb.com/api/v1/json/2/searchplayers.php?p=${searchField}`
     
-fetch(url)
-.then((res)=>res.json())
-.then((data)=>playersDetails(data.player))
-document.getElementById('sppiner').style.display='none'
-}
+    fetch(url)
+    .then((res)=>res.json())
+    .then((data)=>playersDetails(data.player))
+    
+    document.getElementById('sppiner').style.display='none'
+    }
+   }
 
 
 
 
 const playersDetails=(playersof)=>{
     // console.log(players)
-    if(playersof=='false'|| playersof==''){
-        document.getElementById('sppiner').style.display='block'
-    }
+   
     
-    else{
+    if(playersof){
         for(const player of playersof){
     
         const parent=document.getElementById('player-info')
@@ -37,7 +46,7 @@ const playersDetails=(playersof)=>{
         <h4>name: ${player.strPlayer}</h4>
         <h6>Country:${player.strNationality}</h6>
         <div class="allbutton">
-            <button  type="button" class="btn btn-dark">Delete</button>
+            <button onclick=Delete() type="button" class="btn btn-dark">Delete</button>
             <button onclick="Details('${player.idPlayer}')" type="button" class="btn btn-info">Details</button>
         </div>`
         parent.appendChild(div)
@@ -45,8 +54,16 @@ const playersDetails=(playersof)=>{
         }
     
     }
+    else{
+        {
+            const errorShow=document.getElementById('error-handle')
+            const div=document.createElement('div')
+            div.innerHTML=`<h6 class="text-danger mt-auto">Not found please enter right information!</h6>`
+            errorShow.appendChild(div)
+            document.getElementById('sppiner').style.display='block'
+        }
+    }
    //console.log(players)
-
 }
 
 const Details=(id)=>{
@@ -81,4 +98,9 @@ else{
    deailsDiv.appendChild(div)
 
 }
+
+const Delete=()=>{
+    const detailsDelete=document.getElementById('deails-div')
+    detailsDelete.innerHTML=``
+ }
 
