@@ -7,6 +7,7 @@ const allPlayers=()=>{
     document.getElementById('sppiner').style.display='block'
     
     const searchField=document.getElementById('search-field').value;
+   
     const errorShow=document.getElementById('error-handle').innerHTML=``
     if(searchField==''){
         const errorShow=document.getElementById('error-handle')
@@ -25,6 +26,7 @@ const allPlayers=()=>{
     
     document.getElementById('sppiner').style.display='none'
     }
+
    }
 
 
@@ -41,12 +43,12 @@ const playersDetails=(playersof)=>{
         const div=document.createElement('div')
         div.innerHTML=` <div class="card px-1 py-4 border my-2 text-center">
         <div class="photo">
-            <img width="100px" src="${player.strThumb}" alt="image">
+            <img width="200px" src="${player.strThumb}" alt="image">
         </div>
         <h4>name: ${player.strPlayer}</h4>
         <h6>Country:${player.strNationality}</h6>
         <div class="allbutton">
-            <button onclick=Delete() type="button" class="btn btn-dark">Delete</button>
+            <button onclick="Delete('${player.idPlayer}')" type="button" class="btn btn-dark my-2 mx-3">Delete</button>
             <button onclick="Details('${player.idPlayer}')" type="button" class="btn btn-info">Details</button>
         </div>`
         parent.appendChild(div)
@@ -91,7 +93,7 @@ else{
    const div=document.createElement('div')
 
    div.innerHTML=`<div class="card px-1 py-4 border my-2 text-center">
-   <h3>Team ID:${playerId.idTeam} </h3>
+   <h3>Player ID:${playerId.idPlayer} </h3>
    <h5>Team:${playerId.strTeam}</h5>
    <h6>Gender:${playerId.strGender}</h6>
    </div>`
@@ -99,8 +101,25 @@ else{
 
 }
 
-const Delete=()=>{
+/* const Delete=()=>{
     const detailsDelete=document.getElementById('deails-div')
     detailsDelete.innerHTML=``
  }
+ */
+ const Delete=(deleteId)=>{
+ const url=`https://www.thesportsdb.com/api/v1/json/2/lookupplayer.php?id=${deleteId} `;
+ fetch(url)
+ .then((res)=>res.json())
+ .then((data)=>playerDelteId(data.players[0]))
+ }
+ const playerDelteId=(delId)=>{
+     const check=delId.idPlayer;
+     if(delId.idPlayer==check){
+        const detailsDelete=document.getElementById('deails-div')
+        detailsDelete.textContent=``
+     }
+   else{
+       alert('dog')
+   }
 
+ }

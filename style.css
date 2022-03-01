@@ -19,3 +19,9 @@ body {
   margin-bottom: 50px;
   margin-top: -57px;
 }
+.player-information {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-area: calc(2);
+  grid-gap: 20px;
+}
